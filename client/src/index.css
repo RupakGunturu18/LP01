@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+body {
+  overflow-x: hidden;
+  background: linear-gradient(to bottom, #18181b, #09090b 80%);
+  min-height: 100vh;
+}
+
+
+.aboutus-gilbert-font {
+  font-family: 'Gilbert', 'Arial', sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animate-fade-in-down {
+    animation: fade-in-down 0.7s both;
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 0.7s both;
+  }
+  @keyframes fade-in-down {
+    from { opacity: 0; transform: translateY(-20px);}
+    to { opacity: 1; transform: translateY(0);}
+  }
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+  }
+}
