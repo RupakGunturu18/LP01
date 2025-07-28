@@ -6,7 +6,6 @@ import logo from '../assets/logo.png';
 import config from '../utils/config.js';
 
 const Navbar = ({ activeSection }) => {
-  // Nav items for internal page scroll links (with their section IDs)
   const navItems = [
     { label: 'Features', to: '/#features', id: 'features' },
     { label: 'Benefits', to: '/#stakeholders', id: 'stakeholders' },
@@ -22,41 +21,48 @@ const Navbar = ({ activeSection }) => {
     lineHeight: '20px',
   };
 
-  // State to control navbar visibility based on scroll direction
+  // Scroll direction visibility toggle
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
-  const lastScrollY = useRef(window.scrollY);
+  
+  // Add scrolled state for style effects
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    let ticking = false;
-    function handleScroll() {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
-            setIsNavbarVisible(false); // hide on scroll down
-          } else {
-            setIsNavbarVisible(true);  // show on scroll up
-          }
-          lastScrollY.current = currentScrollY;
-          ticking = false;
-        });
-        ticking = true;
+      
+      // Set scrolled state for styling (background blur effect)
+      setScrolled(currentScrollY > 10);
+      
+      // Always show navbar at the very top
+      if (currentScrollY <= 10) {
+        setIsNavbarVisible(true);
       }
-    }
+      // Hide navbar when scrolling down
+      else if (currentScrollY > lastScrollY) {
+        setIsNavbarVisible(false);
+      }
+      // Show navbar when scrolling up
+      else if (currentScrollY < lastScrollY) {
+        setIsNavbarVisible(true);
+      }
+      
+      lastScrollY = currentScrollY;
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-    // eslint-disable-next-line
   }, []);
 
-  // Dynamic class for active or hover states for section links
   const getLinkClass = (id) =>
     `${navLinkBaseClass} ${activeSection === id ? 'text-purple-300' : 'hover:text-purple-300'}`;
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50
-        transition-transform duration-300
-        bg-gray-900/60 backdrop-blur-lg border-b border-white/5
+      className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300
+        ${scrolled ? 'bg-gray-900/80 shadow-md backdrop-blur' : 'bg-transparent'}
         ${isNavbarVisible ? 'translate-y-0' : '-translate-y-full'}
       `}
       style={{ willChange: "transform" }}
@@ -86,7 +92,6 @@ const Navbar = ({ activeSection }) => {
           {/* Center Navigation */}
           <div className="hidden md:flex items-center justify-center flex-1 px-8">
             <div className="flex items-baseline space-x-10">
-              {/* Our Story Link with animation and font styles */}
               <Link
                 to="/our"
                 className={
@@ -105,7 +110,7 @@ const Navbar = ({ activeSection }) => {
                 />
               </Link>
 
-              {/* Section Links for smooth scrolling */}
+              {/* Section Links */}
               {navItems.map(({ label, to, id }) => (
                 <HashLink
                   key={id}

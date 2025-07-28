@@ -7,7 +7,6 @@ import ChromaGrid from './ChromaGrid';
 import Navbar from './Navbar.jsx'; // adjust path as needed
 import Footer from "./Footer.jsx";
 
-
 const imageUrl =
   "https://thumbs.dreamstime.com/b/event-management-concept-meeting-white-office-table-93231489.jpg";
 
@@ -70,7 +69,6 @@ const zPhotoPlaceholders = [
   { top: 200, left: 180 },
   { top: 220, left: 0 },
   { top: 380, left: 120 }
-
 ];
 
 const bigImages = [
@@ -81,7 +79,7 @@ const bigImages = [
 ];
 
 const zPhotoImages = [
-  "https://media.istockphoto.com/id/1297821882/vector/print-and-typography-services-banner-flat-vector-illustration-isolated.jpg?s=612x612&w=0&k=20&c=Ugasx7KlI0QHVNk-62dL0SGMPLnLjYzLO77NERqSu4E=", // Or use a photo URL
+  "https://media.istockphoto.com/id/1297821882/vector/print-and-typography-services-banner-flat-vector-illustration-isolated.jpg?s=612x612&w=0&k=20&c=Ugasx7KlI0QHVNk-62dL0SGMPLnLjYzLO77NERqSu4E=",
   "https://www.kdmevents.co.uk/_cache/is-event-management-503x327.jpg",
   "https://img.freepik.com/premium-vector/event-management-wedding-planner-manager-planning-event-conference-party_501813-2157.jpg",
   "https://5.imimg.com/data5/SELLER/Default/2023/3/295133854/TJ/YR/WW/156624171/event-management-website-services-500x500.jpg",
@@ -98,48 +96,10 @@ const photoLayout = [
   { top: 40, left: 230, rotate: 8 }
 ];
 
-
-<div style={{
-  flex: 1,
-  minHeight: "100vh",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  background: "#161629"
-}}>
-  <div style={{
-    width: 520,
-    height: 440,
-    position: "relative"
-  }}>
-    {bigImages.map((url, idx) => (
-      <img
-        key={idx}
-        src={url}
-        alt={`Polaroid ${idx + 1}`}
-        style={{
-          position: "absolute",
-          top: photoLayout[idx]?.top || 0,
-          left: photoLayout[idx]?.left || 0,
-          width: 180,
-          height: 180,
-          objectFit: "cover",
-          borderRadius: 14,
-          border: "8px solid #fff",
-          boxShadow: "0 10px 40px rgba(0,0,0,0.19)",
-          transform: `rotate(${photoLayout[idx]?.rotate || 0}deg)`,
-          zIndex: idx + 1
-        }}
-      />
-    ))}
-  </div>
-</div>
-
 export default function HeroSplitScreen() {
   return (
-    
-    <div className="bg-gray-900 text-white font-sans min-h-screen">
-      {/* Reuse Navbar */}
+    <div className="bg-gray-900 text-white font-sans min-h-screen" style={{backgroundColor: '#111827'}}>
+      {/* Reuse Navbar - Add activeSection prop if needed */}
       <Navbar />
 
       {/* Hero Section */}
@@ -151,7 +111,6 @@ export default function HeroSplitScreen() {
           fontFamily: "'Montserrat', Arial, sans-serif",
           overflow: "hidden",
           position: "relative",
-          
         }}
       >
         {/* Left: Animated Heading */}
@@ -202,55 +161,58 @@ export default function HeroSplitScreen() {
               </motion.span>
             ))}
           </motion.h3>
+          
           <div className="text-animate slide-up" style={{ transitionDelay: "0.3s" }}>
-  <span
-    style={{
-      display: "block",
-      fontSize: "3.2vw", // Reduced size
-      fontWeight: 700,
-      color: "#fff",
-      fontFamily: "'Poppins', Arial, sans-serif",
-      marginBottom: "0.3vw",
-      letterSpacing: "0.08em",
-      textAlign: "left"
-    }}
-  >
-    WE BELIEVE IN EMPOWERING
-  </span>
-</div>
-<div className="text-animate slide-up" style={{ transitionDelay: "0.5s" }}>
-  <span
-    style={{
-      display: "block",
-      fontSize: "4.5vw",
-      fontWeight: 900,
-      color: "#a259f7",
-      fontFamily: "'Poppins', Arial, sans-serif",
-      marginBottom: "0.1vw",
-      letterSpacing: "0.08em",
-      textAlign: "left"
-    }}
-  >
-    CREATIVITY  & <br></br>
-    SIMPLICITY
-  </span>
-</div>
+            <span
+              style={{
+                display: "block",
+                fontSize: "3.2vw",
+                fontWeight: 700,
+                color: "#fff",
+                fontFamily: "'Poppins', Arial, sans-serif",
+                marginBottom: "0.3vw",
+                letterSpacing: "0.08em",
+                textAlign: "left"
+              }}
+            >
+              WE BELIEVE IN EMPOWERING
+            </span>
+          </div>
+          
+          <div className="text-animate slide-up" style={{ transitionDelay: "0.5s" }}>
+            <span
+              style={{
+                display: "block",
+                fontSize: "4.5vw",
+                fontWeight: 900,
+                color: "#a259f7",
+                fontFamily: "'Poppins', Arial, sans-serif",
+                marginBottom: "0.1vw",
+                letterSpacing: "0.08em",
+                textAlign: "left"
+              }}
+            >
+              CREATIVITY & <br />
+              SIMPLICITY
+            </span>
+          </div>
+          
           <div
             className="text-animate fade-in"
             style={{ transitionDelay: "0.7s" }}
           >
             <p
               style={{
-                fontSize: "1.4vw", // slightly reduced for better fit
+                fontSize: "1.4vw",
                 color: "#cbd5e1",
                 lineHeight: 1.7,
                 marginTop: "0.5vw",
-                maxWidth: "60vw", // increased width for more space
+                maxWidth: "60vw",
                 fontWeight: 500,
                 fontFamily: "'Poppins', 'Montserrat', Arial, sans-serif",
                 letterSpacing: "0.01em",
                 textShadow: "0px 3px 12px rgba(0,0,0,0.4)",
-                wordBreak: "break-word", // ensures no overflow
+                wordBreak: "break-word",
               }}
             >
               The event management world faces many challenges today, but no community is better equipped than ours to overcome them. Through passion, innovation, and collaboration, we lead the way forward.
@@ -258,83 +220,82 @@ export default function HeroSplitScreen() {
           </div>
         </motion.div>
 
-        {/* Right Image */}
         {/* Right: Z-shaped Placeholders */}
         <div
-  style={{
-    flex: 1,
-    minHeight: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    background: "#161629",
-    overflow: "hidden",
-    flexDirection: "column"
-  }}
->
-  <div
-  style={{
-    background: "linear-gradient(to bottom right, #1d1d37, #291f48)", // purple gradient similar to AboutUsSection
-    borderRadius: 24,
-    padding: 24,
-    boxShadow: "0 20px 40px rgba(41, 31, 72, 0.6)", // shadow similar to AboutUsSection's shadow-purple-900/35
-    width: 430,  // increased width to accommodate padding and image sizes nicely
-    height: 400, // increased height for similar reasons
-    position: "relative",
-    margin: "0 auto",
-    pointerEvents: "none",
-    marginTop: "0vh" // keep your upward shift here as you want
-  }}
->
-{zPhotoPlaceholders.map((pos, idx) => {
-  const imgURL = zPhotoImages[idx];
-  const styleCommon = {
-    position: "absolute",
-    top: pos.top,
-    left: pos.left,
-    width: 220,         // Enlarged size, adjust as needed
-    height: 170,        // Enlarged size, adjust as needed
-    border: "4px solid #fff",
-    borderRadius: 5,
-    boxShadow: "0 6px 20px rgba(0,0,0,0.13)",
-    zIndex: idx + 1
-  };
+          style={{
+            flex: 1,
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "#161629",
+            overflow: "hidden",
+            flexDirection: "column"
+          }}
+        >
+          <div
+            style={{
+              background: "linear-gradient(to bottom right, #1d1d37, #291f48)",
+              borderRadius: 24,
+              padding: 24,
+              boxShadow: "0 20px 40px rgba(41, 31, 72, 0.6)",
+              width: 430,
+              height: 400,
+              position: "relative",
+              margin: "0 auto",
+              pointerEvents: "none",
+              marginTop: "0vh"
+            }}
+          >
+            {zPhotoPlaceholders.map((pos, idx) => {
+              const imgURL = zPhotoImages[idx];
+              const styleCommon = {
+                position: "absolute",
+                top: pos.top,
+                left: pos.left,
+                width: 220,
+                height: 170,
+                border: "4px solid #fff",
+                borderRadius: 5,
+                boxShadow: "0 6px 20px rgba(0,0,0,0.13)",
+                zIndex: idx + 1
+              };
 
-  return imgURL ? (
-    <motion.img
-      key={idx}
-      src={imgURL}
-      alt={`photo ${idx + 1}`}
-      style={styleCommon}
-      variants={placeholderVariants}
-      initial="initial"
-      animate="animate"
-      transition={{
-        type: "spring",
-        stiffness: 80,
-        damping: 18,
-        delay: staggerDelays[idx]
-      }}
-    />
-  ) : (
-    <motion.div
-      key={idx}
-      style={{ ...styleCommon, background: "#222" }}
-      variants={placeholderVariants}
-      initial="initial"
-      animate="animate"
-      transition={{
-        type: "spring",
-        stiffness: 80,
-        damping: 18,
-        delay: staggerDelays[idx]
-      }}
-    />
-  );
-})}
+              return imgURL ? (
+                <motion.img
+                  key={idx}
+                  src={imgURL}
+                  alt={`photo ${idx + 1}`}
+                  style={styleCommon}
+                  variants={placeholderVariants}
+                  initial="initial"
+                  animate="animate"
+                  transition={{
+                    type: "spring",
+                    stiffness: 80,
+                    damping: 18,
+                    delay: staggerDelays[idx]
+                  }}
+                />
+              ) : (
+                <motion.div
+                  key={idx}
+                  style={{ ...styleCommon, background: "#222" }}
+                  variants={placeholderVariants}
+                  initial="initial"
+                  animate="animate"
+                  transition={{
+                    type: "spring",
+                    stiffness: 80,
+                    damping: 18,
+                    delay: staggerDelays[idx]
+                  }}
+                />
+              );
+            })}
+          </div>
+        </div>
 
-  </div>
-</div>
         {/* Text Overlay */}
         <div
           style={{
@@ -352,70 +313,72 @@ export default function HeroSplitScreen() {
 
       {/* CSS Animations */}
       <style>{`
-  .image-animate {
-    opacity: 0;
-    transform: scale(1.08) translateX(60px);
-    animation: imgEntrance 1.4s ease-out forwards 0.3s;
-  }
-  @keyframes imgEntrance {
-    to {
-      transform: scale(1) translateX(0);
-      opacity: 1;
-    }
-  }
+        .image-animate {
+          opacity: 0;
+          transform: scale(1.08) translateX(60px);
+          animation: imgEntrance 1.4s ease-out forwards 0.3s;
+        }
+        @keyframes imgEntrance {
+          to {
+            transform: scale(1) translateX(0);
+            opacity: 1;
+          }
+        }
 
-  .text-animate {
-    opacity: 0;
-    transform: translateY(40px);
-    animation: textAppear 1.2s ease forwards;
-  }
+        .text-animate {
+          opacity: 0;
+          transform: translateY(40px);
+          animation: textAppear 1.2s ease forwards;
+        }
 
-  .fade-in {
-    animation: fadeIn 1.2s ease forwards;
-  }
+        .fade-in {
+          animation: fadeIn 1.2s ease forwards;
+        }
 
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-    }
-  }
+        @keyframes fadeIn {
+          to {
+            opacity: 1;
+          }
+        }
 
-  @keyframes textAppear {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @media (max-width: 900px) {
-    .text-animate span {
-      font-size: 6.5vw !important;
-    }
-    .text-animate p {
-      font-size: 4vw !important;
-    }
-    .image-animate {
-      width: 95% !important;
-      height: 70vh !important;
-      left: 0 !important;
-    }
-  }
-  @media (max-width: 600px) {
-    .text-animate h3 {
-      font-size: 6vw !important;
-    }
-    .text-animate span {
-      font-size: 8vw !important;
-    }
-    .image-animate {
-      width: 100% !important;
-      height: auto !important;
-      left: 0 !important;
-    }
-  }
-  `}</style>
+        @keyframes textAppear {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @media (max-width: 900px) {
+          .text-animate span {
+            font-size: 6.5vw !important;
+          }
+          .text-animate p {
+            font-size: 4vw !important;
+          }
+          .image-animate {
+            width: 95% !important;
+            height: 70vh !important;
+            left: 0 !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .text-animate h3 {
+            font-size: 6vw !important;
+          }
+          .text-animate span {
+            font-size: 8vw !important;
+          }
+          .image-animate {
+            width: 100% !important;
+            height: auto !important;
+            left: 0 !important;
+          }
+        }
+      `}</style>
+
       {/* About Us Section */}
       <AboutUsSection />
+      
       {/* AI Ecosystem Section */}
       <AIEcosystemSection />
 
@@ -424,58 +387,55 @@ export default function HeroSplitScreen() {
         <ScrollStackExample />
       </div>
 
-      {/* Leadership Section */}
-     <section
-  className="w-full flex flex-col items-center justify-center py-16"
-  style={{
-    background: "#000", // Black background for this section
-  }}
->
-  <h2
-    className="text-7xl font-extrabold text-white text-center mb-12 tracking-tight"
-    style={{
-      fontFamily: "'Poppins', Arial, sans-serif",
-      letterSpacing: "0.04em"
-    }}
-  >
-    Our Leadership
-  </h2>
-
-  <div className="w-full flex justify-center">
-    <div
-      style={{
-        height: '600px',
-        position: 'relative',
-        width: '100%',
-        maxWidth: '1200px',
-        display: 'flex',
-        justifyContent: 'center',
-        // background: "rgba(0,0,0,0.6)", // Black with opacity
-        alignItems: 'center',
-        gap: '2.5rem',
-      }}
-    >
-      <ChromaGrid
-        items={leadershipItems}
-        radius={300}
-        damping={0.45}
-        fadeOut={0.6}
-        ease="power3.out"
-        className="w-full flex justify-center items-center gap-10"
-  cardClassName="w-[350px] h-[500px] bg-[#101426] rounded-[28px] shadow-2xl"
-        cardStyle={{
-    background: "#000", // Black background for this section
-          borderRadius: 28,
+      {/* Leadership Section - REMOVED Footer from inside this section */}
+      <section
+        className="w-full flex flex-col items-center justify-center py-16"
+        style={{
+          background: "#000",
         }}
-      />
-    </div>
-  </div>
+      >
+        <h2
+          className="text-7xl font-extrabold text-white text-center mb-12 tracking-tight"
+          style={{
+            fontFamily: "'Poppins', Arial, sans-serif",
+            letterSpacing: "0.04em"
+          }}
+        >
+          Our Leadership
+        </h2>
 
-  <Footer />
-</section>
+        <div className="w-full flex justify-center">
+          <div
+            style={{
+              height: '600px',
+              position: 'relative',
+              width: '100%',
+              maxWidth: '1200px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '2.5rem',
+            }}
+          >
+            <ChromaGrid
+              items={leadershipItems}
+              radius={300}
+              damping={0.45}
+              fadeOut={0.6}
+              ease="power3.out"
+              className="w-full flex justify-center items-center gap-10"
+              cardClassName="w-[350px] h-[500px] bg-[#101426] rounded-[28px] shadow-2xl"
+              cardStyle={{
+                background: "#000",
+                borderRadius: 28,
+              }}
+            />
+          </div>
+        </div>
+      </section>
 
-
-
+      {/* Footer - NOW OUTSIDE the leadership section */}
+      <Footer />
     </div>
   );
 }

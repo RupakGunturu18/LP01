@@ -48,6 +48,7 @@ const testimonials = [
 ];
 
 export default function TestimonialsSection() {
+  const setactive = "testimonials";
   return (
     <section id="testimonials" className="py-24 px-4 bg-gray-900 text-white">
       <div className="max-w-6xl mx-auto text-center">

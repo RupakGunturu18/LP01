@@ -1,21 +1,131 @@
-@import "tailwindcss";
+/* ==============================================
+   CRITICAL CSS - Add to TOP of your index.css
+   This prevents FOUC (Flash of Unstyled Content)
+   ============================================== */
 
+/* Ensure immediate background on page load */
 html {
+  background: linear-gradient(to bottom, #18181b, #09090b 80%);
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
+
 body {
   overflow-x: hidden;
   background: linear-gradient(to bottom, #18181b, #09090b 80%);
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  /* Prevent white flash during font loading */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
+/* Loading screen that matches your design */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #18181b, #09090b 80%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.page-loader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Spinner that matches your theme */
+.loader-spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top: 2px solid #a78bfa;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Hide main content until fully loaded */
+.main-content {
+  opacity: 0;
+  transition: opacity 0.4s ease-in;
+}
+
+.main-content.content-loaded {
+  opacity: 1;
+}
+
+/* Prevent layout shift during loading */
+.loading-placeholder {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #18181b, #09090b 80%);
+}
+
+/* Critical font loading optimization */
+@font-face {
+  font-family: 'Gilbert';
+  font-display: swap; /* Prevents invisible text during font load */
+  src: url('path-to-gilbert-font') format('woff2');
+}
 
 .aboutus-gilbert-font {
   font-family: 'Gilbert', 'Arial', sans-serif;
   font-weight: 700;
   letter-spacing: 2px;
+  font-display: swap;
 }
+
+/* Skeleton loading animation for content */
+.skeleton-loading {
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.05) 25%, 
+    rgba(255, 255, 255, 0.1) 50%, 
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Immediate visibility for critical UI elements */
+.critical-ui {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Smooth content reveal */
+.fade-in-content {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==============================================
+   YOUR EXISTING CSS CONTINUES BELOW
+   ============================================== */
+
+@import "tailwindcss";
 
 @tailwind base;
 @tailwind components;
@@ -36,4 +146,288 @@ body {
     from { opacity: 0; transform: translateY(20px);}
     to { opacity: 1; transform: translateY(0);}
   }
+}
+
+/* GPU Acceleration for smooth animations */
+.motion-element {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Fixed header optimization */
+.fixed-header {
+  will-change: transform;
+  transform: translateZ(0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+/* Optimize background gradients */
+.gradient-bg {
+  will-change: auto;
+  transform: translateZ(0);
+}
+
+/* Image optimizations */
+img {
+  image-rendering: optimizeQuality;
+  transform: translateZ(0);
+}
+
+/* Reduce paint on scroll for heavy elements */
+.threads-background {
+  will-change: transform;
+  transform: translateZ(0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Card hover optimizations */
+.feature-card {
+  will-change: transform;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.feature-card:hover {
+  transform: translateZ(0) scale(1.03);
+}
+
+/* Stakeholder section glow optimization */
+.stakeholder-glow {
+  transition: box-shadow 0.3s ease-out;
+  will-change: box-shadow;
+}
+
+/* Optimize text rendering */
+.optimized-text {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Reduce layout thrashing */
+.no-layout-shift {
+  contain: layout style paint;
+}
+
+/* Optimize large sections */
+.section-container {
+  contain: layout;
+  will-change: auto;
+}
+
+/* Footer optimizations */
+.footer-section {
+  contain: layout style;
+}
+
+/* Animation performance for split text */
+.split-text-char {
+  will-change: transform, opacity;
+  display: inline-block;
+  transform: translateZ(0);
+}
+
+/* CardSwap container optimization */
+.card-swap-container {
+  will-change: transform;
+  transform: translateZ(0);
+  contain: layout style paint;
+}
+
+/* Navbar optimization */
+.navbar-container {
+  will-change: transform;
+  transform: translateZ(0);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Smooth transitions for all interactive elements */
+.interactive-element {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Optimize button hover states */
+.btn-optimized {
+  will-change: transform, background-color;
+  transition: transform 0.2s ease-out, background-color 0.2s ease-out;
+}
+
+.btn-optimized:hover {
+  transform: translateY(-1px) translateZ(0);
+}
+
+/* Prevent text selection during animations */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Memory optimization for large backgrounds */
+.memory-optimized-bg {
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Optimize testimonials section if present */
+.testimonial-card {
+  will-change: transform;
+  transform: translateZ(0);
+  contain: layout style;
+}
+
+/* Contact form optimizations */
+.contact-form {
+  contain: layout style;
+}
+
+.contact-input {
+  will-change: border-color, box-shadow;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Loading state optimizations */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .motion-element {
+    will-change: auto;
+  }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  .auto-dark {
+    color-scheme: dark;
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .high-dpi-optimized {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  .mobile-optimized {
+    will-change: auto;
+  }
+  
+  .mobile-text {
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  .complex-animation {
+    animation: none;
+  }
+}
+
+/* Print optimizations */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-optimized {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* Focus management for accessibility */
+.focus-visible {
+  outline: 2px solid #a78bfa;
+  outline-offset: 2px;
+}
+
+/* Optimize for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .touch-optimized {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+}
+
+/* Container queries for responsive optimization */
+@container (min-width: 768px) {
+  .container-responsive {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+/* Intersection Observer optimization classes */
+.fade-in-observer {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-observer.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Virtual scrolling optimizations */
+.virtual-list-item {
+  contain: strict;
+  will-change: transform;
+}
+
+/* Critical path CSS inlining hint */
+.critical-css {
+  font-display: swap;
+}
+
+/* Optimize for painted area */
+.paint-optimized {
+  contain: paint;
+  overflow: hidden;
+}
+
+/* Reduce compositing layers when not needed */
+.composite-optimized {
+  will-change: auto;
+}
+
+/* Lazy loading optimization */
+.lazy-load {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.lazy-load.loaded {
+  opacity: 1;
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import { Mail, Phone, MapPin } from "react-feather";
 // Option 1: Local import
-// import logo from './assets/logo.png';
+import logo from '../assets/logo.png';
 // Option 2: Direct URL
-const logo = "https://genzgalaxy.tech/assets/logo.png"; // Change to your logo
+// const logo = "https://genzgalaxy.tech/assets/logo.png"; // Change to your logo
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 
